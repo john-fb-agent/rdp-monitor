@@ -1,0 +1,19 @@
+{
+  "monitor": {
+    "host": "localhost",
+    "port": 3389,
+    "checkIntervalMinutes": 5,
+    "timeout": 3000
+  },
+  "telegram": {
+    "enabled": true,
+    "botToken": "${TELEGRAM_BOT_TOKEN}",
+    "chatId": "${TELEGRAM_CHAT_ID}"
+  },
+  "logging": {
+    "level": "info",
+    "directory": "logs",
+    "maxFiles": 7,
+    "maxSize": "10m"
+  }
+}

@@ -1,14 +1,14 @@
-# 🖥️ Windows RDP Monitor
+# 🖥️ Windows Port Monitor
 
-**Remote Desktop Protocol (RDP) Port Monitor for Windows**
+**Custom TCP Port Monitor for Windows**
 
-Monitor Windows RDP port 3389 accessibility with state-change notifications via Telegram.
+Monitor any TCP port (default: RDP 3389) accessibility with state-change notifications via Telegram.
 
 ---
 
 ## 📋 Overview
 
-A lightweight TypeScript/Node.js utility that monitors Windows RDP port 3389 accessibility and sends Telegram notifications only when the status changes (up → down or down → up).
+A lightweight TypeScript/Node.js utility that monitors TCP port accessibility and sends Telegram notifications only when the status changes (up → down or down → up). Supports custom ports for any service monitoring.
 
 ---
 
@@ -16,7 +16,8 @@ A lightweight TypeScript/Node.js utility that monitors Windows RDP port 3389 acc
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **Port Monitoring** | Continuously checks RDP port 3389 accessibility |
+| 🔍 **Port Monitoring** | Continuously checks any TCP port accessibility |
+| 🎯 **Custom Port** | Configure any port (default: 3389 for RDP) |
 | 📢 **Smart Notifications** | Only notifies on status changes (not every check) |
 | 💬 **Telegram Alerts** | Instant notifications via Telegram Bot |
 | 📝 **Configurable Logging** | Rotating logs with customizable retention |
@@ -154,33 +155,41 @@ This will:
 
 ## 📊 Usage
 
-### Check RDP Status
+### Check Port Status
 
 ```bash
 npm run start
 ```
 
-**Output**:
+**Output (RDP - Port 3389)**:
 ```
-[2026-03-16 11:35:00] ℹ️  RDP Monitor started
-[2026-03-16 11:35:01] ℹ️  Checking port 3389...
-[2026-03-16 11:35:02] ✅ RDP is ACCESSIBLE
+[2026-03-16 11:35:00] ℹ️  Port Monitor started
+[2026-03-16 11:35:01] ℹ️  Checking localhost:3389...
+[2026-03-16 11:35:02] ✅ Port 3389 is ACCESSIBLE
 [2026-03-16 11:35:02] ℹ️  State: UP → UP (no change)
+[2026-03-16 11:35:02] ℹ️  Monitor completed
+```
+
+**Output (SSH - Port 22)**:
+```
+[2026-03-16 11:35:00] ℹ️  Port Monitor started
+[2026-03-16 11:35:01] ℹ️  Checking 192.168.1.100:22...
+[2026-03-16 11:35:02] ✅ Port 22 is ACCESSIBLE
 [2026-03-16 11:35:02] ℹ️  Monitor completed
 ```
 
 ### Status Change Detection
 
-**When RDP goes DOWN**:
+**When port goes DOWN**:
 ```
-[2026-03-16 11:40:01] ❌ RDP is INACCESSIBLE
+[2026-03-16 11:40:01] ❌ Port 3389 is INACCESSIBLE
 [2026-03-16 11:40:01] 📢 State changed: UP → DOWN
 [2026-03-16 11:40:02] ✅ Telegram notification sent
 ```
 
-**When RDP comes back UP**:
+**When port comes back UP**:
 ```
-[2026-03-16 12:00:01] ✅ RDP is ACCESSIBLE
+[2026-03-16 12:00:01] ✅ Port 3389 is ACCESSIBLE
 [2026-03-16 12:00:01] 📢 State changed: DOWN → UP
 [2026-03-16 12:00:02] ✅ Telegram notification sent
 ```
@@ -194,9 +203,22 @@ npm run start
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `host` | string | `localhost` | Target host to monitor |
-| `port` | number | `3389` | RDP port to check |
+| `port` | number | `3389` | TCP port to check (default: 3389 for RDP) |
 | `checkIntervalMinutes` | number | `5` | How often to check (for scheduled task) |
 | `timeout` | number | `3000` | Connection timeout in ms |
+
+### Common Port Examples
+
+| Service | Port | Config Example |
+|---------|------|----------------|
+| **RDP** | 3389 | `"port": 3389` |
+| **SSH** | 22 | `"port": 22` |
+| **HTTP** | 80 | `"port": 80` |
+| **HTTPS** | 443 | `"port": 443` |
+| **MSSQL** | 1433 | `"port": 1433` |
+| **MySQL** | 3306 | `"port": 3306` |
+| **PostgreSQL** | 5432 | `"port": 5432` |
+| **Redis** | 6379 | `"port": 6379` |
 
 ### Telegram Settings
 

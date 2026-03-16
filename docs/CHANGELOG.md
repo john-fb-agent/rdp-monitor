@@ -62,22 +62,6 @@
 
 ---
 
-## Upcoming Features
-
-### Planned (Next Release)
-- [ ] Multiple host monitoring
-- [ ] Email notifications
-- [ ] Web dashboard
-- [ ] Historical statistics
-
-### Under Consideration
-- [ ] Custom port monitoring (not just 3389)
-- [ ] Alert escalation rules
-- [ ] Integration with ITSM tools
-- [ ] Mobile app
-
----
-
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.

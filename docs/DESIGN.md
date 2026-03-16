@@ -1,6 +1,6 @@
 # 🏗️ System Design Document
 
-**Windows RDP Monitor - Technical Design**
+**Windows Port Monitor - Technical Design**
 
 ---
 
@@ -22,13 +22,13 @@
 
 ### 1.1 Purpose
 
-Monitor Windows RDP port 3389 accessibility and send Telegram notifications only when status changes occur.
+Monitor Windows TCP port accessibility (configurable, default: 3389 for RDP) and send Telegram notifications only when status changes occur.
 
 ### 1.2 Core Requirements
 
 | Requirement | Description | Priority |
 |-------------|-------------|----------|
-| **Port Monitoring** | Check RDP port 3389 accessibility | P0 |
+| **Port Monitoring** | Check configurable TCP port accessibility | P0 |
 | **State Change Detection** | Only notify on status changes (not every check) | P0 |
 | **Telegram Notifications** | Send alerts via Telegram Bot | P0 |
 | **Configurable Logging** | Rotating logs with retention settings | P1 |

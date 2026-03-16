@@ -196,6 +196,47 @@ npm run start
 
 ---
 
+## 🧪 Testing
+
+### Test Telegram Notification
+
+Before deploying, test your Telegram configuration:
+
+```bash
+npm run test-notification
+```
+
+**Expected Output**:
+```
+🧪 Testing Telegram Notification...
+
+Configuration loaded:
+  Enabled: true
+  Bot Token: ***xyz123
+  Chat ID: 190623454
+
+📤 Sending test notification...
+
+✅ Success! Test notification sent!
+   Check your Telegram for the test message.
+```
+
+**What it tests**:
+- ✅ Configuration file is valid
+- ✅ Bot token is correct
+- ✅ Chat ID is correct
+- ✅ Network connection to Telegram API
+- ✅ Message delivery
+
+**Troubleshooting**:
+If the test fails:
+1. Check if Bot Token is correct (from @BotFather)
+2. Check if Chat ID is correct (use @userinfobot)
+3. Make sure you have started a chat with the bot
+4. Check your network/firewall settings
+
+---
+
 ## ⚙️ Configuration Options
 
 ### Monitor Settings
@@ -246,6 +287,7 @@ npm run start
 | `npm run start` | Run monitor once |
 | `npm run dev` | Run in development mode |
 | `npm run build` | Compile TypeScript |
+| `npm run test-notification` | **Test Telegram notification** |
 | `npm run install-task` | Install Windows Task Scheduler entry |
 | `npm run uninstall-task` | Remove Task Scheduler entry |
 | `npm run test` | Run tests |

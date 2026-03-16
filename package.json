@@ -10,6 +10,7 @@
     "watch": "tsc -w",
     "install-task": "node scripts/install-task.js",
     "uninstall-task": "node scripts/uninstall-task.js",
+    "test-notification": "ts-node scripts/test-notification.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts"

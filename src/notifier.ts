@@ -60,16 +60,16 @@ function formatMessage(
 ): string {
   const statusIcon = status === 'UP' ? '✅' : '❌';
   const statusText = status === 'UP' ? 'ACCESSIBLE' : 'INACCESSIBLE';
-  const changeText = changed 
-    ? `\n\n*Change Detected!*` 
-    : '\n\n*Status: No Change*`;
+  const changeText = changed
+    ? '\n\n*Change Detected!*'
+    : '\n\n*Status: No Change*';
 
-  const message = `🖥️ *RDP Status Alert*
-
-*Status:* ${statusIcon} ${statusText}
-*Host:* ${host}:${port}
-*Time:* ${formatTimestamp(new Date().toISOString())}
-${changeText}`;
+  const message =
+    '🖥️ *RDP Status Alert*\n\n' +
+    '*Status:* ' + statusIcon + ' ' + statusText + '\n' +
+    '*Host:* ' + host + ':' + port + '\n' +
+    '*Time:* ' + formatTimestamp(new Date().toISOString()) + '\n' +
+    changeText;
 
   return message;
 }

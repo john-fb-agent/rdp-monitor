@@ -7,7 +7,7 @@
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 import * as fs from 'fs';
-import { sendTestMessage } from '../src/notifier';
+import { sendTestMessage } from './notifier';
 
 // Load environment variables
 dotenv.config();

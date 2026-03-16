@@ -203,6 +203,10 @@ npm run start
 Before deploying, test your Telegram configuration:
 
 ```bash
+# 1. Build the project
+npm run build
+
+# 2. Run test
 npm run test-notification
 ```
 

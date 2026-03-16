@@ -81,7 +81,7 @@ rdp-monitor/
 
 ### Prerequisites
 
-- **Node.js** 18+ ([Download](https://nodejs.org/))
+- **Node.js** 24+ ([Download](https://nodejs.org/))
 - **Windows** 10/11 or Windows Server
 - **Telegram Bot Token** ([Get one](https://t.me/BotFather))
 

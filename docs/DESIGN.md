@@ -328,7 +328,7 @@ DOWN              UP               Send notification (UP alert)
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| **Node.js** | 18+ | Runtime |
+| **Node.js** | 24+ | Runtime |
 | **TypeScript** | 5.x | Language |
 | **Windows Task Scheduler** | - | Scheduling |
 

@@ -46,7 +46,7 @@ function main() {
 
     // Create task
     console.log('Creating new task...');
-    const command = `schtasks /create /tn "${TASK_NAME}" /tr "${NODE_PATH} ${SCRIPT_PATH}" /sc minute /mo 5 /ru SYSTEM /rl HIGHEST /f`;
+    const command = `schtasks /create /tn "${TASK_NAME}" /tr "${NODE_PATH} ${SCRIPT_PATH}" /sc minute /mo 5 /sd "${WORKING_DIR}" /ru SYSTEM /rl HIGHEST /f`;
     
     execSync(command, { stdio: 'inherit' });
 

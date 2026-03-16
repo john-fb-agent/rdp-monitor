@@ -30,15 +30,26 @@ export function initializeLogger(config: LoggerConfig): winston.Logger {
     format: winston.format.combine(
       winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
       winston.format.printf(({ timestamp, level, message }) => {
-        return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
+        // Format: [TIMESTAMP] [LEVEL] Message
+        return `[${timestamp}] [${level.toUpperCase().padEnd(5)}] ${message}`;
       })
     ),
     transports: [
       // Console output
       new winston.transports.Console({
         format: winston.format.combine(
-          winston.format.colorize(),
-          winston.format.simple()
+          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+          winston.format.printf(({ timestamp, level, message }) => {
+            const levelColors: any = {
+              error: '\x1b[31m',  // Red
+              warn: '\x1b[33m',   // Yellow
+              info: '\x1b[36m',   // Cyan
+              debug: '\x1b[35m'   // Magenta
+            };
+            const reset = '\x1b[0m';
+            const color = levelColors[level] || reset;
+            return `[${timestamp}] [${color}${level.toUpperCase().padEnd(5)}${reset}] ${message}`;
+          })
         )
       }),
       // File output with rotation
@@ -46,7 +57,12 @@ export function initializeLogger(config: LoggerConfig): winston.Logger {
         filename: logFile,
         maxFiles: config.maxFiles,
         maxsize: parseSize(config.maxSize),
-        format: winston.format.json()
+        format: winston.format.combine(
+          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+          winston.format.printf(({ timestamp, level, message }) => {
+            return `[${timestamp}] [${level.toUpperCase().padEnd(5)}] ${message}`;
+          })
+        )
       })
     ]
   });

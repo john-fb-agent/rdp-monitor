@@ -91,7 +91,7 @@ async function runMonitor(): Promise<void> {
     // Cleanup old logs
     cleanupOldLogs(config.logging.directory, config.logging.maxFiles);
 
-    logger.info('RDP Monitor started');
+    logger.info('Port Monitor started');
     logger.info(`Checking ${config.monitor.host}:${config.monitor.port}...`);
 
     // Check RDP status
@@ -101,7 +101,7 @@ async function runMonitor(): Promise<void> {
       config.monitor.timeout
     );
 
-    logger.info(`RDP is ${status === 'UP' ? 'ACCESSIBLE' : 'INACCESSIBLE'}`);
+    logger.info(`Port ${config.monitor.port} is ${status === 'UP' ? 'ACCESSIBLE' : 'INACCESSIBLE'}`);
 
     // Load previous state
     const previousState = loadState();
@@ -110,7 +110,8 @@ async function runMonitor(): Promise<void> {
     const { state, changed } = updateState(status, previousState);
 
     if (changed) {
-      logger.info(`State changed: ${previousState?.status || 'UNKNOWN'} → ${status}`);
+      const prevState = previousState?.status || 'UNKNOWN';
+      logger.info(`State changed: ${prevState} → ${status}`);
       
       // Send notification
       const result = await sendNotification(
@@ -122,19 +123,19 @@ async function runMonitor(): Promise<void> {
       );
 
       if (result.success) {
-        logger.info('Telegram notification sent');
+        logger.info('✓ Telegram notification sent');
       } else {
-        logger.warn(`Failed to send notification: ${result.error}`);
+        logger.warn(`✗ Failed to send notification: ${result.error}`);
       }
     } else {
       logger.info(`State: ${previousState?.status || 'UNKNOWN'} → ${status} (no change)`);
     }
 
-    logger.info('Monitor completed');
+    logger.info('Monitor completed successfully');
 
   } catch (error) {
     const logger = getLogger();
-    logger.error(`Monitor failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    logger.error(`✗ Monitor failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     process.exit(1);
   }
 }
